@@ -6,6 +6,7 @@ header {
 .header_title {
   display: flex;
   font-size: large;
+  margin-right: 2vw;
 }
 
 .header_list {
@@ -13,6 +14,14 @@ header {
   list-style: none;
   padding-top: 15px;
   gap: 20px;
+}
+
+.header_list a {
+  color: black;
+  text-decoration: none;
+}
+.header_list a:hover {
+  color: grey;
 }
 
 .search_bar {
@@ -55,11 +64,63 @@ header {
   margin-top: 0;
 }
 
-.shop_now_button{
+.shop_now_button {
   margin-left: 5vw;
+  margin-top: 5vh;
   background-color: black;
   color: white;
   border: none;
   padding: 16px 54px;
   border-radius: 32px;
+  transition: 0.5s ease;
+  font-size: small;
+  font-weight: bold;
+}
+.shop_now_button:hover {
+  background-color: grey;
+  cursor: pointer;
+  color: black;
+  font-size: small;
+  font-weight: bold;
+}
+
+.products {
+  padding: 20px 5vw;
+}
+
+.products h3 {
+  text-align: center;
+  font-size: 30px;
+  margin-bottom: 30px;  
+}
+
+.product_container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.product_card {
+  background-color: #f2f0f1;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: start;
+  max-width: 250px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.product_image img {
+  width: 150px;
+  margin-bottom: 20px;
+}
+
+.product_image_text {
+  background-color: white;
+  padding: 15px;
+  margin: 0 -20px -20px -20px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
