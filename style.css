@@ -9,6 +9,7 @@ header {
   align-items: baseline;
   padding: 0vh 5vw;
   flex-wrap: wrap;
+  position: relative;
 }
 
 .header_title {
@@ -163,4 +164,63 @@ header {
   padding: 0;
   margin-top: 5vh;
   background-color: transparent;
+}
+
+.menu_toggle {
+  display: none;
+  font-size: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .div_list,
+  .search_bar {
+    display: none;
+    width: 100%;
+    text-align: center;
+    margin-top: 10px;
+    background: #f2f2f2;
+    border-radius: 8px;
+    padding: 10px;
+  }
+
+  .div_list.active,
+  .search_bar.active {
+    display: block;
+  }
+
+  .header_list {
+    flex-direction: column;
+    gap: 12px;
+    padding: 0;
+    list-style: none;
+  }
+
+  .header_list li a {
+    display: block;
+    padding: 8px;
+    text-decoration: none;
+    color: #333;
+    border-radius: 6px;
+    transition: background 0.2s ease;
+  }
+
+  .header_list li a:hover {
+    background: #ddd;
+  }
+
+  .menu_toggle {
+    display: block;
+    margin-left: auto;
+    font-size: 24px;
+    cursor: pointer;
+    background: none;
+    border: none;
+  }
+
+  header {
+    flex-wrap: wrap;
+  }
 }
