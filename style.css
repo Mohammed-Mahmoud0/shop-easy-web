@@ -112,7 +112,7 @@ header {
 
 .shop_now_button {
   margin-left: 0;
-  margin-top: 0;
+  margin-top: 5vh;
   background-color: black;
   color: white;
   border: none;
