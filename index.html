@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Shop Easy</title>
+    <title id="title">Shop Easy</title>
     <link rel="stylesheet" href="style.css" />
     <link
       rel="stylesheet"
@@ -22,11 +22,10 @@
         <button class="menu_toggle">☰</button>
         <div class="div_list">
           <ul class="header_list">
-            <li><a href="#">Home</a></li>
+            <li><a href="#title">Home</a></li>
             <li><a href="#products">Products</a></li>
             <li><a href="#">Favorites</a></li>
             <li><a href="#">Cart</a></li>
-            <li><a href="#">Checkout</a></li>
           </ul>
         </div>
         <div class="search_bar">
@@ -51,7 +50,7 @@
           style.
         </p>
         <div>
-          <button class="shop_now_button">Shop Now</button>
+          <button href="#products" class="shop_now_button">Shop Now</button>
         </div>
       </div>
       <div class="landing_image">
@@ -61,7 +60,57 @@
     <section class="products">
       <h3 id="products">Products</h3>
       <div class="product_container"></div>
+      <div class="view_all_button_container">
+        <button class="view_all_button">View All Products</button>
+      </div>
     </section>
+    <footer class="footer">
+      <div class="footer_content">
+        <div class="footer_section">
+          <h4>Shop Easy</h4>
+          <p>
+            We offer a wide variety of products to suit your needs, from
+            electronics to home goods and more.
+          </p>
+          <div class="social_links">
+            <a href="#" class="social_icon"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="social_icon"><i class="fab fa-facebook"></i></a>
+            <a href="#" class="social_icon"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social_icon"><i class="fab fa-pinterest"></i></a>
+          </div>
+        </div>
+        <div class="footer_section">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Features</a></li>
+            <li><a href="#">Works</a></li>
+            <li><a href="#">Career</a></li>
+          </ul>
+        </div>
+        <div class="footer_section">
+          <h4>Help</h4>
+          <ul>
+            <li><a href="#">Customer Support</a></li>
+            <li><a href="#">Delivery Details</a></li>
+            <li><a href="#">Terms & Conditions</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+          </ul>
+        </div>
+        <div class="footer_section">
+          <h4>FAQ</h4>
+          <ul>
+            <li><a href="#">Account</a></li>
+            <li><a href="#">Manage Deliveries</a></li>
+            <li><a href="#">Orders</a></li>
+            <li><a href="#">Payments</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer_bottom">
+        <p>&copy; 2025 Shop Easy. All rights reserved.</p>
+      </div>
+    </footer>
     <script src="script.js"></script>
   </body>
 </html>

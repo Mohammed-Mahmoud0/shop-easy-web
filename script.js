@@ -60,9 +60,24 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  const viewAllButton = document.querySelector(".view_all_button");
+  let showingAllProducts = false;
+
+  viewAllButton.addEventListener("click", async () => {
+    const products = await fetchProducts();
+    if (showingAllProducts) {
+      displayProducts(products.slice(0, 8));
+      viewAllButton.textContent = "View All Products";
+    } else {
+      displayProducts(products);
+      viewAllButton.textContent = "Collapse Products";
+    }
+    showingAllProducts = !showingAllProducts;
+  });
+
   async function main() {
     const products = await fetchProducts();
-    displayProducts(products);
+    displayProducts(products.slice(0, 8));
   }
 
   main();
