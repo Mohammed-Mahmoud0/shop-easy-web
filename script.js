@@ -8,6 +8,56 @@ document.addEventListener("DOMContentLoaded", () => {
     searchBar.classList.toggle("active");
   });
 
+  function getFavorites() {
+    const favorites = localStorage.getItem("favorites");
+    return favorites ? JSON.parse(favorites) : [];
+  }
+
+  function saveFavorites(favorites) {
+    localStorage.setItem("favorites", JSON.stringify(favorites));
+  }
+
+  function addToFavorites(product) {
+    let favorites = getFavorites();
+    const existingIndex = favorites.findIndex(fav => fav.id === product.id);
+    
+    if (existingIndex === -1) {
+      favorites.push(product);
+      saveFavorites(favorites);
+      return true; 
+    }
+    return false;
+  }
+
+  function removeFromFavorites(productId) {
+    let favorites = getFavorites();
+    favorites = favorites.filter(fav => fav.id !== productId);
+    saveFavorites(favorites);
+  }
+
+  function isInFavorites(productId) {
+    const favorites = getFavorites();
+    return favorites.some(fav => fav.id === productId);
+  }
+
+  function toggleFavorite(product, button) {
+    const isFavorited = isInFavorites(product.id);
+    
+    if (isFavorited) {
+      removeFromFavorites(product.id);
+      button.classList.remove("favorited");
+      button.querySelector("i").className = "fa-regular fa-heart";
+      button.title = "Add to favorites";
+      button.setAttribute("aria-label", "Add to favorites");
+    } else {
+      addToFavorites(product);
+      button.classList.add("favorited");
+      button.querySelector("i").className = "fa-solid fa-heart";
+      button.title = "Remove from favorites";
+      button.setAttribute("aria-label", "Remove from favorites");
+    }
+  }
+
   async function fetchProducts() {
     try {
       const response = await fetch("https://fakestoreapi.com/products");
@@ -27,6 +77,11 @@ document.addEventListener("DOMContentLoaded", () => {
       const productCard = document.createElement("div");
       productCard.classList.add("product_card");
 
+      const isFavorited = isInFavorites(product.id);
+      const heartIcon = isFavorited ? "fa-solid fa-heart" : "fa-regular fa-heart";
+      const favoritedClass = isFavorited ? "favorited" : "";
+      const favoriteTitle = isFavorited ? "Remove from favorites" : "Add to favorites";
+
       productCard.innerHTML = `
         <div class="product_image">
           <img src="${product.image}" alt="${product.title}" />
@@ -39,11 +94,11 @@ document.addEventListener("DOMContentLoaded", () => {
           </div>
           <div class="product_icons">
             <button
-              class="icon_btn favorite"
-              title="Add to favorites"
-              aria-label="Add to favorites"
+              class="icon_btn favorite ${favoritedClass}"
+              title="${favoriteTitle}"
+              aria-label="${favoriteTitle}"
             >
-              <i class="fa-regular fa-heart" aria-hidden="true"></i>
+              <i class="${heartIcon}" aria-hidden="true"></i>
             </button>
             <button
               class="icon_btn cart"
@@ -55,6 +110,11 @@ document.addEventListener("DOMContentLoaded", () => {
           </div>
         </div>
       `;
+
+      const favoriteBtn = productCard.querySelector(".favorite");
+      favoriteBtn.addEventListener("click", () => {
+        toggleFavorite(product, favoriteBtn);
+      });
 
       productContainer.appendChild(productCard);
     });

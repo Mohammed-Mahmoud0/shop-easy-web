@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title id="title">Shop Easy</title>
+    <title>Favorites - Shop Easy</title>
     <link rel="stylesheet" href="style.css" />
     <link
       rel="stylesheet"
@@ -22,8 +22,8 @@
         <button class="menu_toggle">☰</button>
         <div class="div_list">
           <ul class="header_list">
-            <li><a href="#title">Home</a></li>
-            <li><a href="#products">Products</a></li>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#products">Products</a></li>
             <li><a href="favorites.html">Favorites</a></li>
             <li><a href="#">Cart</a></li>
           </ul>
@@ -37,33 +37,17 @@
         </div>
       </header>
     </nav>
-    <section class="landing_page">
-      <div class="landing_content">
-        <h1>
-          FIND PRODUCTS<br />
-          THAT MATCHES<br />
-          YOUR STYLE<br />
-        </h1>
-        <p>
-          Browse through our diverse range of meticulously crafted garments,
-          designed to bring out your individuality and cater to your sense of
-          style.
-        </p>
-        <div>
-          <button onclick="location.href='#products'" class="shop_now_button">Shop Now</button>
+    
+    <section class="favorites-section">
+      <h3>My Favorites</h3>
+      <div class="favorites_container" id="favoritesContainer">
+        <div class="no-favorites" id="noFavorites">
+          <p>No favorite products yet. Start adding some!</p>
+          <button onclick="location.href='index.html#products'" class="shop_now_button">Browse Products</button>
         </div>
       </div>
-      <div class="landing_image">
-        <img src="assets/landing.jpg" alt="Landing Page Image" />
-      </div>
     </section>
-    <section class="products">
-      <h3 id="products">Products</h3>
-      <div class="product_container"></div>
-      <div class="view_all_button_container">
-        <button class="view_all_button">View All Products</button>
-      </div>
-    </section>
+
     <footer class="footer">
       <div class="footer_content">
         <div class="footer_section">
@@ -111,6 +95,7 @@
         <p>&copy; 2025 Shop Easy. All rights reserved.</p>
       </div>
     </footer>
-    <script src="script.js"></script>
+    
+    <script src="favorites.js"></script>
   </body>
 </html>
