@@ -8,12 +8,10 @@
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
-      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
     />
   </head>
   <body>
+    <!-- Same nav as index.html -->
     <nav>
       <header>
         <div class="header_title">
@@ -22,7 +20,7 @@
         <button class="menu_toggle">☰</button>
         <div class="div_list">
           <ul class="header_list">
-            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#title">Home</a></li>
             <li><a href="index.html#products">Products</a></li>
             <li><a href="favorites.html">Favorites</a></li>
             <li><a href="#">Cart</a></li>
@@ -37,17 +35,16 @@
         </div>
       </header>
     </nav>
-    
-    <section class="favorites-section">
-      <h3>My Favorites</h3>
-      <div class="favorites_container" id="favoritesContainer">
-        <div class="no-favorites" id="noFavorites">
-          <p>No favorite products yet. Start adding some!</p>
-          <button onclick="location.href='index.html#products'" class="shop_now_button">Browse Products</button>
-        </div>
-      </div>
-    </section>
 
+    <!-- Favorites Section -->
+    <main class="content">
+      <section class="products">
+        <h3>Favorites</h3>
+        <div class="product_container favorites_container"></div>
+      </section>
+    </main>
+
+    <!-- Same footer as index.html -->
     <footer class="footer">
       <div class="footer_content">
         <div class="footer_section">
@@ -95,7 +92,7 @@
         <p>&copy; 2025 Shop Easy. All rights reserved.</p>
       </div>
     </footer>
-    
+
     <script src="favorites.js"></script>
   </body>
 </html>

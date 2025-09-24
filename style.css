@@ -12,6 +12,7 @@ body {
   min-width: 300px;
   overflow-x: hidden;
   margin: 5px;
+  font-family: Arial, sans-serif;
 }
 
 header {
@@ -382,8 +383,6 @@ header {
   }
 }
 
-/* favorites page styles */
-
 .icon_btn.favorite {
   color: #e0245e;
   background: #fff0f6;
@@ -427,41 +426,9 @@ header {
   pointer-events: none;
 }
 
-.icon_btn.favorite.favorited {
-  color: #e0245e;
-  background: #ffe3ef;
-  border: 1px solid #f3b6d1;
-}
+/* style for favorites page */
 
-.icon_btn.favorite.favorited i {
-  font-weight: 900; 
-}
-
-.favorites-section {
+.favorites_section {
   padding: 20px 5vw;
-  min-height: 60vh;
-}
-
-.favorites-section h3 {
   text-align: center;
-  font-size: 30px;
-  margin-bottom: 30px;
-}
-
-.favorites_container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 50px;
-  justify-content: center;
-}
-
-.no-favorites {
-  text-align: center;
-  padding: 40px;
-  color: #666;
-}
-
-.no-favorites p {
-  font-size: 18px;
-  margin-bottom: 20px;
 }
