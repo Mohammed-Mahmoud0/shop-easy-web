@@ -116,19 +116,46 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  function filterProductsBySearch(products, query) {
+    return products.filter(
+      (product) =>
+        product.title.toLowerCase().includes(query.toLowerCase()) ||
+        product.description.toLowerCase().includes(query.toLowerCase()) ||
+        product.category.toLowerCase().includes(query.toLowerCase())
+    );
+  }
+
   async function main() {
     const products = await fetchProducts();
     let showAll = false;
 
     const toggleBtn = document.querySelector("#toggleProductsBtn");
+    const searchInput = document.querySelector(".search_input");
 
     displayProducts(products, showAll);
     filterProductsByCategory();
+
     toggleBtn.addEventListener("click", () => {
       showAll = !showAll;
       displayProducts(products, showAll);
       toggleBtn.textContent = showAll ? "Show Less" : "View All Products";
       toggleBtn.style.padding = showAll ? "10px 50px" : "10px 20px";
+    });
+
+    searchInput.addEventListener("input", (event) => {
+      const query = event.target.value;
+      const filteredProducts = query
+        ? filterProductsBySearch(products, query)
+        : products;
+      if (filteredProducts.length === 0) {
+        document.querySelector(".product_container").innerHTML = `
+          <div class="no_results" style="text-align: center; padding: 20px; margin-top: 50px;margin-bottom: 50px;">
+            <p>No products match your search. 😞</p>
+          </div>
+        `;
+      } else {
+        displayProducts(filteredProducts, showAll);
+      }
     });
   }
 

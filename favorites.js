@@ -49,9 +49,21 @@ document.addEventListener("DOMContentLoaded", () => {
     return card;
   }
 
-  function displayFavorites() {
+  function filterFavoritesBySearch(query) {
+    const allFavorites = getFavorites();
+    if (!query) return allFavorites;
+
+    return allFavorites.filter(
+      (product) =>
+        product.title.toLowerCase().includes(query.toLowerCase()) ||
+        product.description.toLowerCase().includes(query.toLowerCase()) ||
+        product.category.toLowerCase().includes(query.toLowerCase())
+    );
+  }
+
+  function displayFavorites(filteredFavorites = null) {
     favoritesContainer.innerHTML = "";
-    const favorites = getFavorites();
+    const favorites = filteredFavorites || getFavorites();
     if (favorites.length === 0) {
       favoritesContainer.innerHTML = `
         <div class="empty_favorites" style="text-align: center; padding: 20px; margin-top: 50px;margin-bottom: 50px;">
@@ -69,4 +81,18 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   displayFavorites();
+
+  const searchInput = document.querySelector(".search_input");
+  searchInput.addEventListener("input", (e) => {
+    const query = e.target.value;
+    const filteredFavorites = filterFavoritesBySearch(query);
+    displayFavorites(filteredFavorites);
+    if (filteredFavorites.length === 0) {
+      favoritesContainer.innerHTML = `
+        <div class="no_results" style="text-align: center; padding: 20px; margin-top: 50px;margin-bottom: 50px;">
+          <p>No favorites match your search. 😞</p>
+        </div>
+      `;
+    }
+  });
 });
