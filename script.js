@@ -82,6 +82,40 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  function getCategories(products) {
+    const categories = new Set(products.map((product) => product.category));
+    return Array.from(categories);
+  }
+
+  function getCategoryOptions(products) {
+    const categories = getCategories(products);
+    return categories
+      .map((category) => `<option value="${category}">${category}</option>`)
+      .join("");
+  }
+
+  fetchProducts().then((products) => {
+    const categoryOptions = getCategoryOptions(products);
+    categoryFilter.innerHTML =
+      `<option value="all">All</option>` + categoryOptions;
+  });
+
+  function filterProductsByCategory() {
+    const categoryFilter = document.getElementById("categoryFilter");
+    categoryFilter.addEventListener("change", async () => {
+      const products = await fetchProducts();
+      const selectedCategory = categoryFilter.value;
+      if (selectedCategory === "all") {
+        displayProducts(products, false);
+        return;
+      }
+      const filteredProducts = selectedCategory
+        ? products.filter((product) => product.category === selectedCategory)
+        : products;
+      displayProducts(filteredProducts, false);
+    });
+  }
+
   async function main() {
     const products = await fetchProducts();
     let showAll = false;
@@ -89,7 +123,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const toggleBtn = document.querySelector("#toggleProductsBtn");
 
     displayProducts(products, showAll);
-
+    filterProductsByCategory();
     toggleBtn.addEventListener("click", () => {
       showAll = !showAll;
       displayProducts(products, showAll);
@@ -97,8 +131,6 @@ document.addEventListener("DOMContentLoaded", () => {
       toggleBtn.style.padding = showAll ? "10px 50px" : "10px 20px";
     });
   }
-
-  main();
 
   main();
 });

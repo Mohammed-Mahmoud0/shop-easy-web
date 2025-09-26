@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (favorites.length === 0) {
       favoritesContainer.innerHTML = `
         <div class="empty_favorites" style="text-align: center; padding: 20px; margin-top: 50px;margin-bottom: 50px;">
-          <p>No favorites yet 💔</p>
+          <p>No favorites yet 💔 start browsing products to add some</p>
           <button onclick="location.href='index.html#products'" class="shop_now_button" style="margin-top: 60px; ">
             Browse Products
           </button>
