@@ -17,9 +17,20 @@ document.addEventListener("DOMContentLoaded", () => {
     localStorage.setItem("favorites", JSON.stringify(favorites));
   }
 
+  function getCartItems() {
+    return JSON.parse(localStorage.getItem("cart")) || [];
+  }
+
+  function saveCartItems(cartItems) {
+    localStorage.setItem("cart", JSON.stringify(cartItems));
+  }
+
   function createFavoriteCard(product) {
     const card = document.createElement("div");
     card.classList.add("product_card");
+
+    const cartItems = getCartItems();
+    const isInCart = cartItems.some((item) => item.id === product.id);
 
     card.innerHTML = `
       <div class="product_image">
@@ -35,6 +46,11 @@ document.addEventListener("DOMContentLoaded", () => {
           <button class="icon_btn favorite active" title="Remove from favorites">
             <i class="fa-solid fa-heart"></i>
           </button>
+          <button class="icon_btn cart ${isInCart ? "active" : ""}" title="${
+      isInCart ? "In Cart" : "Add to cart"
+    }">
+            <i class="fa-solid fa-cart-shopping" style="color: ${isInCart ? "green" : "gray"};"></i>
+          </button>
         </div>
       </div>
     `;
@@ -43,6 +59,18 @@ document.addEventListener("DOMContentLoaded", () => {
     favBtn.addEventListener("click", () => {
       let favorites = getFavorites().filter((fav) => fav.id !== product.id);
       saveFavorites(favorites);
+      displayFavorites();
+    });
+
+    const cartBtn = card.querySelector(".cart");
+    cartBtn.addEventListener("click", () => {
+      if (isInCart) {
+        const updatedCart = cartItems.filter((item) => item.id !== product.id);
+        saveCartItems(updatedCart);
+      } else {
+        cartItems.push(product);
+        saveCartItems(cartItems);
+      }
       displayFavorites();
     });
 

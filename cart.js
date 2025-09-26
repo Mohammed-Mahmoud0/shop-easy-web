@@ -1,0 +1,98 @@
+document.addEventListener("DOMContentLoaded", () => {
+  const cartContainer = document.querySelector(".cart_container");
+  const menuBtn = document.querySelector(".menu_toggle");
+  const navList = document.querySelector(".div_list");
+  const searchBar = document.querySelector(".search_bar");
+
+  menuBtn.addEventListener("click", () => {
+    navList.classList.toggle("active");
+    searchBar.classList.toggle("active");
+  });
+
+  function getCartItems() {
+    return JSON.parse(localStorage.getItem("cart")) || [];
+  }
+
+  function saveCartItems(cartItems) {
+    localStorage.setItem("cart", JSON.stringify(cartItems));
+  }
+
+  function createCartItemCard(product) {
+    const card = document.createElement("div");
+    card.classList.add("product_card");
+
+    card.innerHTML = `
+      <div class="product_image">
+        <img src="${product.image}" alt="${product.title}" />
+      </div>
+      <div class="product_image_text">
+        <h4 class="product_category">${product.category}</h4>
+        <div class="product_meta">
+          <span class="product_title">${product.title}</span>
+          <span class="product_price">$${product.price}</span>
+        </div>
+        <div class="product_icons">
+          <button class="icon_btn cart active" title="Remove from cart">
+            <i class="fa-solid fa-cart-shopping"></i>
+          </button>
+        </div>
+      </div>
+    `;
+
+    const cartBtn = card.querySelector(".cart");
+    cartBtn.addEventListener("click", () => {
+      let cartItems = getCartItems().filter((item) => item.id !== product.id);
+      saveCartItems(cartItems);
+      displayCartItems();
+    });
+
+    return card;
+  }
+
+  function filterCartItemsBySearch(query) {
+    const allCartItems = getCartItems();
+    if (!query) return allCartItems;
+
+    return allCartItems.filter(
+      (product) =>
+        product.title.toLowerCase().includes(query.toLowerCase()) ||
+        product.description.toLowerCase().includes(query.toLowerCase()) ||
+        product.category.toLowerCase().includes(query.toLowerCase())
+    );
+  }
+
+  function displayCartItems(filteredCartItems = null) {
+    cartContainer.innerHTML = "";
+    const cartItems = filteredCartItems || getCartItems();
+    if (cartItems.length === 0) {
+      cartContainer.innerHTML = `
+        <div class="empty_cart" style="text-align: center; padding: 20px; margin-top: 50px;margin-bottom: 50px;">
+          <p>Your cart is empty 🛒 start adding products to your cart</p>
+          <button onclick="location.href='index.html#products'" class="shop_now_button" style="margin-top: 60px; ">
+            Browse Products
+          </button>
+        </div>
+      `;
+      return;
+    }
+    cartItems.forEach((product) => {
+      cartContainer.appendChild(createCartItemCard(product));
+    });
+  }
+
+  displayCartItems();
+
+  const searchInput = document.querySelector(".search_input");
+  searchInput.addEventListener("input", (e) => {
+    const query = e.target.value;
+    const filteredCartItems = filterCartItemsBySearch(query);
+    displayCartItems(filteredCartItems);
+    if (filteredCartItems.length === 0) {
+      cartContainer.innerHTML = `
+        <div class="no_results" style="text-align: center; padding: 20px; margin-top: 50px;margin-bottom: 50px;">
+          <p>No cart items match your search. 😞</p>
+        </div>
+      `;
+    }
+  });
+});

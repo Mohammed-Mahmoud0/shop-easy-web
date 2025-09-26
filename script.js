@@ -16,6 +16,14 @@ document.addEventListener("DOMContentLoaded", () => {
     localStorage.setItem("favorites", JSON.stringify(favorites));
   }
 
+  function getCartItems() {
+    return JSON.parse(localStorage.getItem("cart")) || [];
+  }
+
+  function saveCartItems(cartItems) {
+    localStorage.setItem("cart", JSON.stringify(cartItems));
+  }
+
   async function fetchProducts() {
     try {
       const response = await fetch("https://fakestoreapi.com/products");
@@ -31,11 +39,13 @@ document.addEventListener("DOMContentLoaded", () => {
     productContainer.innerHTML = "";
 
     const favorites = getFavorites();
+    const cartItems = getCartItems();
 
     const visibleProducts = showAll ? products : products.slice(0, 8);
 
     visibleProducts.forEach((product) => {
       const isFavorite = favorites.some((fav) => fav.id === product.id);
+      const isInCart = cartItems.some((item) => item.id === product.id);
 
       const productCard = document.createElement("div");
       productCard.classList.add("product_card");
@@ -57,8 +67,11 @@ document.addEventListener("DOMContentLoaded", () => {
                   }">
             <i class="${isFavorite ? "fa-solid" : "fa-regular"} fa-heart"></i>
           </button>
-          <button class="icon_btn cart" title="Add to cart">
-            <i class="fa-solid fa-cart-shopping"></i>
+          <button class="icon_btn cart ${isInCart ? "active" : ""}" 
+                  title="${isInCart ? "In Cart" : "Add to cart"}">
+            <i class="${"fa-solid fa-cart-shopping"}" style="color: ${
+        isInCart ? "green" : "gray"
+      };"></i>
           </button>
         </div>
       </div>
@@ -66,15 +79,29 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const favBtn = productCard.querySelector(".favorite");
       favBtn.addEventListener("click", () => {
-        let updatedFavorites = getFavorites();
         if (isFavorite) {
-          updatedFavorites = updatedFavorites.filter(
+          const updatedFavorites = favorites.filter(
             (fav) => fav.id !== product.id
           );
+          saveFavorites(updatedFavorites);
         } else {
-          updatedFavorites.push(product);
+          favorites.push(product);
+          saveFavorites(favorites);
         }
-        saveFavorites(updatedFavorites);
+        displayProducts(products, showAll);
+      });
+
+      const cartBtn = productCard.querySelector(".cart");
+      cartBtn.addEventListener("click", () => {
+        if (isInCart) {
+          const updatedCart = cartItems.filter(
+            (item) => item.id !== product.id
+          );
+          saveCartItems(updatedCart);
+        } else {
+          cartItems.push(product);
+          saveCartItems(cartItems);
+        }
         displayProducts(products, showAll);
       });
 
@@ -106,13 +133,13 @@ document.addEventListener("DOMContentLoaded", () => {
       const products = await fetchProducts();
       const selectedCategory = categoryFilter.value;
       if (selectedCategory === "all") {
-        displayProducts(products, false);
-        return;
+        displayProducts(products);
+      } else {
+        const filteredProducts = products.filter(
+          (product) => product.category === selectedCategory
+        );
+        displayProducts(filteredProducts);
       }
-      const filteredProducts = selectedCategory
-        ? products.filter((product) => product.category === selectedCategory)
-        : products;
-      displayProducts(filteredProducts, false);
     });
   }
 
@@ -137,25 +164,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     toggleBtn.addEventListener("click", () => {
       showAll = !showAll;
-      displayProducts(products, showAll);
       toggleBtn.textContent = showAll ? "Show Less" : "View All Products";
-      toggleBtn.style.padding = showAll ? "10px 50px" : "10px 20px";
+      displayProducts(products, showAll);
     });
 
     searchInput.addEventListener("input", (event) => {
       const query = event.target.value;
-      const filteredProducts = query
-        ? filterProductsBySearch(products, query)
-        : products;
-      if (filteredProducts.length === 0) {
-        document.querySelector(".product_container").innerHTML = `
-          <div class="no_results" style="text-align: center; padding: 20px; margin-top: 50px;margin-bottom: 50px;">
-            <p>No products match your search. 😞</p>
-          </div>
-        `;
-      } else {
-        displayProducts(filteredProducts, showAll);
-      }
+      const filteredProducts = filterProductsBySearch(products, query);
+      displayProducts(filteredProducts, true);
     });
   }
 
