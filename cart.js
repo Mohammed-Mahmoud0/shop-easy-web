@@ -35,6 +35,13 @@ document.addEventListener("DOMContentLoaded", () => {
           <button class="icon_btn cart active" title="Remove from cart">
             <i class="fa-solid fa-cart-shopping"></i>
           </button>
+          <button class="icon_btn favorite" title="Decrease quantity">
+            <i class="fa-solid fa-minus"></i>
+          </button>
+          <h4 style="margin: 5px 5px;">${product.quantity || 1}</h4>
+          <button class="icon_btn cart" title="Increase quantity">
+            <i class="fa-solid fa-plus"></i>
+          </button>
         </div>
       </div>
     `;

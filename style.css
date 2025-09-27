@@ -438,11 +438,10 @@ header {
   border: 1px solid #d2f5e3;
   transition: background 0.2s, color 0.2s, border 0.2s;
 }
-.icon_btn.cart:hover,
-.icon_btn.cart:focus {
+.icon_btn.cart:hover {
   background: #e0f7ea;
-  color: #075c24;
-  border-color: #b6e9ce;
+  color: green;
+  border-color: green;
 }
 
 .icon_btn {
