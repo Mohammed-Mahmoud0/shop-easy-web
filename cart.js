@@ -35,11 +35,11 @@ document.addEventListener("DOMContentLoaded", () => {
           <button class="icon_btn cart active" title="Remove from cart">
             <i class="fa-solid fa-cart-shopping"></i>
           </button>
-          <button class="icon_btn favorite" title="Decrease quantity">
+          <button class="icon_btn favorite decrease" title="Decrease quantity">
             <i class="fa-solid fa-minus"></i>
           </button>
           <h4 style="margin: 5px 5px;">${product.quantity || 1}</h4>
-          <button class="icon_btn cart" title="Increase quantity">
+          <button class="icon_btn cart increase" title="Increase quantity">
             <i class="fa-solid fa-plus"></i>
           </button>
         </div>
@@ -51,6 +51,29 @@ document.addEventListener("DOMContentLoaded", () => {
       let cartItems = getCartItems().filter((item) => item.id !== product.id);
       saveCartItems(cartItems);
       displayCartItems();
+    });
+
+    const decreaseBtn = card.querySelector(".decrease");
+    decreaseBtn.addEventListener("click", () => {
+      let cartItems = getCartItems();
+      const itemIndex = cartItems.findIndex((item) => item.id === product.id);
+      if (itemIndex !== -1 && cartItems[itemIndex].quantity > 1) {
+        cartItems[itemIndex].quantity -= 1;
+        saveCartItems(cartItems);
+        displayCartItems();
+      }
+    });
+
+    const increaseBtn = card.querySelector(".increase");
+    increaseBtn.addEventListener("click", () => {
+      let cartItems = getCartItems();
+      const itemIndex = cartItems.findIndex((item) => item.id === product.id);
+      if (itemIndex !== -1) {
+        cartItems[itemIndex].quantity =
+          (cartItems[itemIndex].quantity || 1) + 1;
+        saveCartItems(cartItems);
+        displayCartItems();
+      }
     });
 
     return card;
