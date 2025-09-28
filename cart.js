@@ -21,7 +21,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const card = document.createElement("div");
     card.classList.add("product_card");
 
-
     card.innerHTML = `
       <div class="product_image">
         <img src="${product.image}" alt="${product.title}" />
@@ -112,6 +111,23 @@ document.addEventListener("DOMContentLoaded", () => {
     cartItems.forEach((product) => {
       cartContainer.appendChild(createCartItemCard(product));
     });
+    createTotalPriceItem();
+  }
+
+  function calculateTotalPrice() {
+    const cartItems = getCartItems();
+    let totalPrice = 0;
+    cartItems.forEach((item) => {
+      totalPrice += item.price * item.quantity;
+    });
+    return totalPrice.toFixed(2);
+  }
+
+  const totalPrice = document.createElement("div");
+  totalPrice.classList.add("product_card", "total_price");
+  function createTotalPriceItem() {
+    totalPrice.innerHTML = `<h4>Total Price: ${calculateTotalPrice()}</h4>`;
+    cartContainer.parentElement.appendChild(totalPrice);
   }
 
   displayCartItems();

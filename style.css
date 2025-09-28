@@ -461,9 +461,12 @@ header {
   pointer-events: none;
 }
 
-/* style for favorites page */
-
 .favorites_section {
   padding: 20px 5vw;
   text-align: center;
+}
+
+.product_card.total_price {
+  text-align: start;
+  margin: 20px auto;
 }
