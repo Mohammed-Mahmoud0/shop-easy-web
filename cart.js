@@ -21,6 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const card = document.createElement("div");
     card.classList.add("product_card");
 
+
     card.innerHTML = `
       <div class="product_image">
         <img src="${product.image}" alt="${product.title}" />
@@ -42,6 +43,9 @@ document.addEventListener("DOMContentLoaded", () => {
           <button class="icon_btn cart increase" title="Increase quantity">
             <i class="fa-solid fa-plus"></i>
           </button>
+        </div>
+        <div>
+          <h4>Sub Total: ${(product.quantity || 1) * product.price}</h4>
         </div>
       </div>
     `;
