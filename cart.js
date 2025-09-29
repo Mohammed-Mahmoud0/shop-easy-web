@@ -118,7 +118,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const cartItems = getCartItems();
     let totalPrice = 0;
     cartItems.forEach((item) => {
-      totalPrice += item.price * item.quantity;
+      totalPrice += item.price * (item.quantity || 1);
     });
     return totalPrice.toFixed(2);
   }
