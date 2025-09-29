@@ -467,6 +467,6 @@ header {
 }
 
 .product_card.total_price {
-  text-align: start;
+  text-align: center;
   margin: 20px auto;
 }

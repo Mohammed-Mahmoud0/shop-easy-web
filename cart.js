@@ -94,6 +94,22 @@ document.addEventListener("DOMContentLoaded", () => {
     );
   }
 
+  function calculateTotalPrice() {
+    const cartItems = getCartItems();
+    let totalPrice = 0;
+    cartItems.forEach((item) => {
+      totalPrice += item.price * (item.quantity || 1);
+    });
+    return totalPrice.toFixed(2);
+  }
+
+  function updateTotalPrice() {
+    const totalPriceElement = document.querySelector(".total_price");
+    if (totalPriceElement) {
+      totalPriceElement.innerHTML = `<h4>Total Price: ${calculateTotalPrice()}</h4>`;
+    }
+  }
+
   function displayCartItems(filteredCartItems = null) {
     cartContainer.innerHTML = "";
     const cartItems = filteredCartItems || getCartItems();
@@ -111,23 +127,7 @@ document.addEventListener("DOMContentLoaded", () => {
     cartItems.forEach((product) => {
       cartContainer.appendChild(createCartItemCard(product));
     });
-    createTotalPriceItem();
-  }
-
-  function calculateTotalPrice() {
-    const cartItems = getCartItems();
-    let totalPrice = 0;
-    cartItems.forEach((item) => {
-      totalPrice += item.price * (item.quantity || 1);
-    });
-    return totalPrice.toFixed(2);
-  }
-
-  const totalPrice = document.createElement("div");
-  totalPrice.classList.add("product_card", "total_price");
-  function createTotalPriceItem() {
-    totalPrice.innerHTML = `<h4>Total Price: ${calculateTotalPrice()}</h4>`;
-    cartContainer.parentElement.appendChild(totalPrice);
+    updateTotalPrice();
   }
 
   displayCartItems();
