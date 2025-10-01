@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Checkout - Shop Easy</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+    />
+  </head>
+  <body>
+    <nav>
+      <header>
+        <div class="header_title">
+          <h2>Shop Easy</h2>
+        </div>
+        <button class="menu_toggle">☰</button>
+        <div class="div_list">
+          <ul class="header_list">
+            <li><a href="index.html#title">Home</a></li>
+            <li><a href="index.html#products">Products</a></li>
+            <li><a href="favorites.html">Favorites</a></li>
+            <li><a href="cart.html">Cart</a></li>
+          </ul>
+        </div>
+      </header>
+    </nav>
+
+    <div class="content">
+      <section class="checkout_section">
+        <h3>Checkout <i class="fas fa-credit-card" style="color: blue"></i></h3>
+
+        <div class="checkout_container">
+          <div class="order_summary">
+            <h4>Order Summary</h4>
+            <div class="summary_items"></div>
+            <div class="summary_total">
+              <h4>Total: $0.00</h4>
+            </div>
+          </div>
+
+          <div class="checkout_form">
+            <h4>Shipping Information</h4>
+            <form id="checkoutForm">
+              <div class="form_group">
+                <label for="name">Full Name:</label>
+                <input type="text" id="name" name="name" required />
+              </div>
+
+              <div class="form_group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required />
+              </div>
+
+              <div class="form_group">
+                <label for="address">Address:</label>
+                <input id="address" name="address" required></input>
+              </div>
+
+              <button type="submit" class="submit_btn">Place Order</button>
+              <button
+                type="button"
+                class="back_btn"
+                onclick="location.href='cart.html'"
+              >
+                Back to Cart
+              </button>
+            </form>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <footer class="footer">
+      <div class="footer_content">
+        <div class="footer_section">
+          <h4>Shop Easy</h4>
+          <p>
+            We offer a wide variety of products to suit your needs, from
+            electronics to home goods and more.
+          </p>
+          <div class="social_links">
+            <a href="#" class="social_icon"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="social_icon"><i class="fab fa-facebook"></i></a>
+            <a href="#" class="social_icon"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social_icon"><i class="fab fa-pinterest"></i></a>
+          </div>
+        </div>
+        <div class="footer_section">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Features</a></li>
+            <li><a href="#">Works</a></li>
+            <li><a href="#">Career</a></li>
+          </ul>
+        </div>
+        <div class="footer_section">
+          <h4>Help</h4>
+          <ul>
+            <li><a href="#">Customer Support</a></li>
+            <li><a href="#">Delivery Details</a></li>
+            <li><a href="#">Terms & Conditions</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+          </ul>
+        </div>
+        <div class="footer_section">
+          <h4>FAQ</h4>
+          <ul>
+            <li><a href="#">Account</a></li>
+            <li><a href="#">Manage Deliveries</a></li>
+            <li><a href="#">Orders</a></li>
+            <li><a href="#">Payments</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer_bottom">
+        <p>&copy; 2025 Shop Easy. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script src="checkout.js"></script>
+  </body>
+</html>

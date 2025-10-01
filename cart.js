@@ -145,4 +145,14 @@ document.addEventListener("DOMContentLoaded", () => {
       `;
     }
   });
+
+  const checkoutBtn = document.getElementById("checkout_btn");
+  checkoutBtn.addEventListener("click", () => {
+    const cartItems = getCartItems();
+    if (cartItems.length === 0) {
+      alert("Your cart is empty!");
+      return;
+    }
+    window.location.href = "checkout.html";
+  });
 });
