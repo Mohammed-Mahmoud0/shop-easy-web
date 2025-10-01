@@ -470,3 +470,23 @@ header {
   text-align: center;
   margin: 20px auto;
 }
+
+.cart_summary{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+#checkout_btn{
+  margin-top: 0%;
+  font-size: medium;
+  font-weight: 600;
+  border: none;
+  background-color: #e0f7ea;
+  transition: all 0.3s ease;
+}
+#checkout_btn:hover{
+  background-color: rgb(10, 175, 10);
+  cursor: pointer;
+   /* border: 1px solid green; */
+}
