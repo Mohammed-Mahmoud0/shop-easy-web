@@ -61,21 +61,26 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
-      // Clear the cart
+      function checkValidName(name){
+        return /^[A-Za-z]+$/.test(name);
+      }
+
+      if (!checkValidName(name)){
+        alert("please enter a valid name, numbers or symbols are not allowed!");
+        return;
+      }
+
       localStorage.removeItem("cart");
       
       alert(`Thank you ${name}! Your order has been placed successfully. We will send confirmation to ${email}.`);
       
-      // Redirect to home page
       window.location.href = "index.html";
     });
   }
 
-  // Initialize the page
   displayOrderSummary();
   handleFormSubmission();
 
-  // If cart is empty, redirect to cart page
   if (getCartItems().length === 0) {
     alert("Your cart is empty!");
     window.location.href = "cart.html";
